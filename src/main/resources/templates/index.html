@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="base::layout(~{::section})">
+<head>
+<meta charset="UTF-8">
+<title>Index Page</title>
+</head>
+<body>
+
+	<section>
+		<div th:if="${session.message}">
+			<div th:classappend="${session.message.type}" class="alert"
+				role="alert">
+				<span th:text="${session.message.content}"></span>
+
+			</div>
+			<div
+				th:text="${@removeMessage.removeVerificationMessageFromSession()}"></div>
+		</div>
+
+		<div class="container mt-4">
+			<table class="table">
+				<thead class="bg-primary text-white">
+					<tr>
+						<th scope="col">ID</th>
+						<th scope="col">Name</th>
+						<th scope="col">Email</th>
+						<th scope="col">Phone</th>
+						<th scope="col">About</th>
+						<th scope="col">Action</th>
+					</tr>
+				</thead>
+				<tbody th:each="e:${emp}">
+					<tr>
+						<th scope="row"><span th:text="${e.id}"></span></th>
+						<th scope="row"><span th:text="${e.name}"></span></th>
+						<th scope="row"><span th:text="${e.email}"></span></th>
+						<th scope="row"><span th:text="${e.phone}"></span></th>
+						<th scope="row"><span th:text="${e.about}"></span></th>
+						<th scope="row"><a th:href="@{'/edit/'+${e.id}}"
+							class="btn btn-primary">Edit</a> <a
+							th:href="@{'/delete/'+${e.id}}" class="btn btn-danger">Delete</a>
+						</th>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</section>
+
+
+</body>
+</html>
